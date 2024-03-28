@@ -21,11 +21,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Data
-@Table(name = "volunteer")
-public class UserEntity {
-
+@Table(name = "organization")
+public class OrganizationEntity {
+    
     // attributes
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -41,14 +41,14 @@ public class UserEntity {
     // relationships
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "volunteerEntity", cascade = CascadeType.ALL)
-    private List<ChatEntity> chats;
-
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "volunteerEntity", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organizationEntity", cascade = CascadeType.ALL)
     private List<OpportunityEntity> opportunities;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "volunteerEntity", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organizationEntity", cascade = CascadeType.ALL)
     private List<AnnouncementEntity> announcements;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organizationEntity", cascade = CascadeType.ALL)
+    private List<ChatEntity> chats;
 }

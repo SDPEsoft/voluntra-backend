@@ -29,17 +29,17 @@ public class OrganizationServiceImpl implements OrganizationService{
     }
 
     @Override
-    public OrganizationEntity createUser(OrganizationEntity organizationEntity) {
+    public OrganizationEntity createOrganization(OrganizationEntity organizationEntity) {
         return organizationRepository.save(organizationEntity);
     }
 
     @Override
-    public List<OrganizationEntity> getAllUsers() {
+    public List<OrganizationEntity> getAllOrganizations() {
         return organizationRepository.findAll();
     }
 
     @Override
-    public OrganizationEntity getUserById(Long id) {
+    public OrganizationEntity getOrganizationById(Long id) {
         return organizationRepository.findById(id).orElse(null);
     }
     

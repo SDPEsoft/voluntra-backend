@@ -9,8 +9,8 @@ import com.voluntra.backend.entity.AdminEntity;
 
 @Service
 public interface AdminService {
-    AdminEntity createUser(AdminEntity adminEntity);
-    AdminEntity getUserById(Long id);
-    List<AdminEntity> getAllUsers();
+    AdminEntity createAdmin(AdminEntity adminEntity);
+    AdminEntity getAdminById(Long id);
+    List<AdminEntity> getAllAdmins();
     AdminEntity changeUserPassword(Long id, UserPwdDto userPwdDto);
 }

@@ -29,17 +29,17 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public AdminEntity createUser(AdminEntity adminEntity) {
+    public AdminEntity createAdmin(AdminEntity adminEntity) {
         return adminRepository.save(adminEntity);
     }
 
     @Override
-    public List<AdminEntity> getAllUsers() {
+    public List<AdminEntity> getAllAdmins() {
         return adminRepository.findAll();
     }
 
     @Override
-    public AdminEntity getUserById(Long id) {
+    public AdminEntity getAdminById(Long id) {
         return adminRepository.findById(id).orElse(null);
     }
     

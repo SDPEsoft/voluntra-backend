@@ -9,8 +9,8 @@ import com.voluntra.backend.entity.OrganizationEntity;
 
 @Service
 public interface OrganizationService {
-    OrganizationEntity createUser(OrganizationEntity organizationEntity);
-    OrganizationEntity getUserById(Long id);
-    List<OrganizationEntity> getAllUsers();
+    OrganizationEntity createOrganization(OrganizationEntity organizationEntity);
+    OrganizationEntity getOrganizationById(Long id);
+    List<OrganizationEntity> getAllOrganizations();
     OrganizationEntity changeUserPassword(Long id, UserPwdDto userPwdDto);
 }

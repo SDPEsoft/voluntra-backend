@@ -40,11 +40,11 @@ public class AdminEntity {
 
     // relationships
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "adminEntity", cascade = CascadeType.ALL)
-    private List<UserEntity> volunteers;
+    // @JsonIgnore
+    // @OneToMany(fetch = FetchType.LAZY, mappedBy = "adminEntity", cascade = CascadeType.ALL)
+    // private List<UserEntity> volunteers;
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "adminEntity", cascade = CascadeType.ALL)
-    private List<OrganizationEntity> organizations;
+    // @JsonIgnore
+    // @OneToMany(fetch = FetchType.LAZY, mappedBy = "adminEntity", cascade = CascadeType.ALL)
+    // private List<OrganizationEntity> organizations;
 }

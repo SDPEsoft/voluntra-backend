@@ -2,6 +2,7 @@ package com.backend.fullstack.service.impl;
 
 import com.backend.fullstack.dto.VolunteerDto;
 import com.backend.fullstack.entity.Volunteer;
+import com.backend.fullstack.exception.ResourceNotFoundException;
 import com.backend.fullstack.mapper.VolunteerMapper;
 import com.backend.fullstack.repository.VolunteerRepository;
 import com.backend.fullstack.service.VolunteerService;
@@ -21,8 +22,13 @@ public class VolunteerServiceImpl implements VolunteerService {
     }
 
     @Override
-    public VolunteerDto getVolunteer(long employeeID) {
-        return null;
+    public VolunteerDto getVolunteer(long volunteerId) {
+        Volunteer volunteer = volunteerRepository.findById(volunteerId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Volunteer is not found with given ID"+ volunteerId));
+
+
+        return  VolunteerMapper.mapToVolunteerDto(volunteer);
     }
     //Implementation
 }

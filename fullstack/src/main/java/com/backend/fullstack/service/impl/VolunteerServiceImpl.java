@@ -55,5 +55,14 @@ public class VolunteerServiceImpl implements VolunteerService {
 
         return VolunteerMapper.mapToVolunteerDto(updatedVolunteerObj);
     }
+
+    @Override
+    public void deleteVolunteer(long volunteerId) {
+        Volunteer volunteer= volunteerRepository.findById(volunteerId).orElseThrow(
+                ()-> new ResourceNotFoundException("Volunteer is not found with given ID"+volunteerId)
+        );
+        volunteerRepository.deleteById(volunteerId);
+
+    }
     //Implementation
 }

@@ -45,4 +45,10 @@ public class VolunteerController {
         VolunteerDto volunteerDto=volunteerService.updateVolunteer(volunteerId,updatedVolunteer);
         return  ResponseEntity.ok(volunteerDto);
     }
+
+    @DeleteMapping("{id}")
+    public  ResponseEntity<String> deleteEmployee(@PathVariable("id") long volunteerId){
+        volunteerService.deleteVolunteer(volunteerId);
+        return ResponseEntity.ok("Volunteer deleted successfully!.");
+    }
 }

@@ -12,5 +12,6 @@ public interface VolunteerService {
     List<VolunteerDto> getAllVolunteers();
     VolunteerDto updateVolunteer(long volunteerId, VolunteerDto updatedVolunteer);
 
+    void deleteVolunteer(long volunteerId);
 }
 //Interface

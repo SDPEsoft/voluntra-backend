@@ -19,5 +19,10 @@ public class VolunteerServiceImpl implements VolunteerService {
         return VolunteerMapper.mapToVolunteerDto(savedVolunteer);
 
     }
+
+    @Override
+    public VolunteerDto getVolunteer(long employeeID) {
+        return null;
+    }
     //Implementation
 }

@@ -10,6 +10,9 @@ import lombok.Setter;
 public class OpportunityDto {
     private String title;
     private String description;
+    private String type;
+    private String location;
+    private String objectives;
     private Date startDate;
     private Date endDate;
     private Long organizationId;

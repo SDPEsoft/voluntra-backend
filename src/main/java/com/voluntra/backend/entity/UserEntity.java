@@ -39,6 +39,12 @@ public class UserEntity {
 
     private String password;
 
+    private String interests;
+
+    private String abilities;
+    
+    private String talents;
+    
     // relationships
 
     @JsonIgnore

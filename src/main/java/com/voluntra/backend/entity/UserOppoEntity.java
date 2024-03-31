@@ -30,15 +30,9 @@ public class UserOppoEntity {
 
     private String name;
 
-    @Column(unique = true)
-    private String username;
+    private String contact;
 
-    @Column(unique = true)
-    private String email;
-
-    private String abilities;
-
-    private String talents;
+    private String qualification; // qualification lvl - list type
 
     @Column(nullable = false)
     private LocalDateTime time;

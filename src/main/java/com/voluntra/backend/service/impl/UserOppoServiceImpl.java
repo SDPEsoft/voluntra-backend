@@ -35,10 +35,8 @@ public class UserOppoServiceImpl implements UserOppoService{
             UserOppoEntity userOppoEntity = new UserOppoEntity();
             userOppoEntity.setId(userOppoDto.getId());
             userOppoEntity.setName(userOppoDto.getName());
-            userOppoEntity.setUsername(userOppoDto.getUsername());
-            userOppoEntity.setEmail(userOppoDto.getEmail());
-            userOppoEntity.setAbilities(userOppoDto.getAbilities());
-            userOppoEntity.setTalents(userOppoDto.getTalents());
+            userOppoEntity.setContact(userOppoDto.getContact());
+            userOppoEntity.setQualification(userOppoDto.getQualification());
             LocalDateTime dateTime = LocalDateTime.now();
             userOppoEntity.setTime(dateTime);
             userOppoEntity.setUserEntity(userEntity);

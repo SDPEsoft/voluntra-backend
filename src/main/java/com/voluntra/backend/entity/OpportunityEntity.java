@@ -38,6 +38,12 @@ public class OpportunityEntity {
 
     private String description;
 
+    private String type; // one-time, long-term, ongoing
+
+    private String location; // city and region
+
+    private String objectives; // teaching, cleaning, buidling, etc ..
+
     private Date startDate;
 
     private Date endDate;

@@ -10,10 +10,8 @@ import lombok.Setter;
 public class UserOppoDto {
     private Long id;
     private String name;
-    private String username;
-    private String email;
-    private String abilities;
-    private String talents;
+    private String contact;
+    private String qualification;
     private LocalDateTime time;
     private Long volunteerId;
     private Long opportunityId;

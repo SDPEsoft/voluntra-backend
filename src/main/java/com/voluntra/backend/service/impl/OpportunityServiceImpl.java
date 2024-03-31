@@ -28,6 +28,9 @@ public class OpportunityServiceImpl implements OpportunityService{
             OpportunityEntity opportunityEntity = new OpportunityEntity();
             opportunityEntity.setTitle(opportunityDto.getTitle());
             opportunityEntity.setDescription(opportunityDto.getDescription());
+            opportunityEntity.setType(opportunityDto.getType());
+            opportunityEntity.setLocation(opportunityDto.getLocation());
+            opportunityEntity.setObjectives(opportunityDto.getObjectives());
             opportunityEntity.setStartDate(opportunityDto.getStartDate());
             opportunityEntity.setEndDate(opportunityDto.getEndDate());
             opportunityEntity.setOrganizationEntity(organizationEntity);
@@ -74,6 +77,9 @@ public class OpportunityServiceImpl implements OpportunityService{
         if (existingOpportunity!=null) {
             existingOpportunity.setTitle(opportunityEntity.getTitle());
             existingOpportunity.setDescription(opportunityEntity.getDescription());
+            existingOpportunity.setType(opportunityEntity.getType());
+            existingOpportunity.setLocation(opportunityEntity.getLocation());
+            existingOpportunity.setObjectives(opportunityEntity.getObjectives());
             existingOpportunity.setStartDate(opportunityEntity.getStartDate());
             existingOpportunity.setEndDate(opportunityEntity.getEndDate());
             return opportunityRepository.save(existingOpportunity);

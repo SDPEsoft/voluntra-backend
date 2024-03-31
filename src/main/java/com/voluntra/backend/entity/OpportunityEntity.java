@@ -57,6 +57,6 @@ public class OpportunityEntity {
     // private Set<UserEntity> userEntities = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "opportuntityEntity", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "opportunityEntity", cascade = CascadeType.ALL)
     private List<UserOppoEntity> userOppoEntities;
 }

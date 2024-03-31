@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/volunteer")
 public class VolunteerController {
@@ -28,5 +30,12 @@ public class VolunteerController {
     public  ResponseEntity<VolunteerDto> getEmployeeByID(@PathVariable("id")  Long volunteerId){
         VolunteerDto volunteerDto = volunteerService.getVolunteer(volunteerId);
         return ResponseEntity.ok(volunteerDto);
+    }
+
+    //Build Get all employees REST API
+    @GetMapping
+    public ResponseEntity<List<VolunteerDto>> getAllVolunteer() {
+        List<VolunteerDto> volunteers = volunteerService.getAllVolunteers();
+        return  ResponseEntity.ok(volunteers);
     }
 }

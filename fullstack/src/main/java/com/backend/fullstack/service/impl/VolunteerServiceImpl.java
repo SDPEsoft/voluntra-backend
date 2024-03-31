@@ -9,6 +9,9 @@ import com.backend.fullstack.service.VolunteerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class VolunteerServiceImpl implements VolunteerService {
@@ -29,6 +32,13 @@ public class VolunteerServiceImpl implements VolunteerService {
 
 
         return  VolunteerMapper.mapToVolunteerDto(volunteer);
+    }
+
+    @Override
+    public List<VolunteerDto> getAllVolunteers() {
+       List<Volunteer> volunteers = volunteerRepository.findAll();
+        return volunteers.stream().map((volunteer) -> VolunteerMapper.mapToVolunteerDto(volunteer))
+                .collect(Collectors.toList());
     }
     //Implementation
 }

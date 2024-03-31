@@ -4,10 +4,7 @@ import com.backend.fullstack.dto.VolunteerDto;
 import com.backend.fullstack.service.VolunteerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/volunteer")
@@ -24,5 +21,12 @@ public class VolunteerController {
     public ResponseEntity<VolunteerDto> createVolunteer(@RequestBody VolunteerDto volunteerDto){
         VolunteerDto savedVolunteer= volunteerService.createVolunteer(volunteerDto);
         return new ResponseEntity<>(savedVolunteer, HttpStatus.CREATED);
+    }
+
+    //Build Get Volunteer REST API
+    @GetMapping("{id}")
+    public  ResponseEntity<VolunteerDto> getEmployeeByID(@PathVariable("id")  Long volunteerId){
+        VolunteerDto volunteerDto = volunteerService.getVolunteer(volunteerId);
+        return ResponseEntity.ok(volunteerDto);
     }
 }

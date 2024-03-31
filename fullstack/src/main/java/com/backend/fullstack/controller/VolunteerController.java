@@ -38,4 +38,11 @@ public class VolunteerController {
         List<VolunteerDto> volunteers = volunteerService.getAllVolunteers();
         return  ResponseEntity.ok(volunteers);
     }
+
+    //Build Update Employee REST API
+    @PutMapping("{id}")
+    public ResponseEntity<VolunteerDto> updateVolunteer(@PathVariable("id") long volunteerId,@RequestBody VolunteerDto updatedVolunteer){
+        VolunteerDto volunteerDto=volunteerService.updateVolunteer(volunteerId,updatedVolunteer);
+        return  ResponseEntity.ok(volunteerDto);
+    }
 }

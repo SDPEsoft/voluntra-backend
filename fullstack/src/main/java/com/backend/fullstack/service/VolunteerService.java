@@ -10,6 +10,7 @@ public interface VolunteerService {
     VolunteerDto getVolunteer(long employeeID);
 
     List<VolunteerDto> getAllVolunteers();
+    VolunteerDto updateVolunteer(long volunteerId, VolunteerDto updatedVolunteer);
 
 }
 //Interface

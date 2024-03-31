@@ -40,5 +40,20 @@ public class VolunteerServiceImpl implements VolunteerService {
         return volunteers.stream().map((volunteer) -> VolunteerMapper.mapToVolunteerDto(volunteer))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public VolunteerDto updateVolunteer(long volunteerId, VolunteerDto updatedVolunteer) {
+       Volunteer volunteer= volunteerRepository.findById(volunteerId).orElseThrow(
+                ()-> new ResourceNotFoundException("Volunteer is not found with given ID"+volunteerId)
+        );
+       volunteer.setName(updatedVolunteer.getName());
+       volunteer.setContactNumber(updatedVolunteer.getContactNumber());
+       volunteer.setEmail(updatedVolunteer.getEmail());
+       volunteer.setPassword(updatedVolunteer.getPassword());
+
+       Volunteer updatedVolunteerObj=volunteerRepository.save(volunteer);
+
+        return VolunteerMapper.mapToVolunteerDto(updatedVolunteerObj);
+    }
     //Implementation
 }

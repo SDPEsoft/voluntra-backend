@@ -51,5 +51,25 @@ public class UserOppoServiceImpl implements UserOppoService{
     public List<UserOppoEntity> getAllUserOppos() {
         return userOppoRepository.findAll();
     }
+
+    @Override
+    public List<UserOppoEntity> getUserOpposByOppos(Long id) {
+        OpportunityEntity opportunityEntity = opportunityRepository.findById(id).orElse(null);
+        if (opportunityEntity!=null) {
+            return userOppoRepository.findUserOpposByOppos(opportunityEntity);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public List<UserOppoEntity> getUserOpposByUsers(Long id) {
+        UserEntity userEntity = userRepository.findById(id).orElse(null);
+        if (userEntity!=null) {
+            return userOppoRepository.findUserOpposByUsers(userEntity);
+        } else {
+            return null;
+        }
+    }
     
 }

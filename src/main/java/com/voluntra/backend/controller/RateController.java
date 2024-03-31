@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ public class RateController {
     private RateService rateService;
 
     @PostMapping("/rates")
-    public ResponseEntity<RateEntity> addrate(@RequestBody RateDto rateDto){
+    public ResponseEntity<RateEntity> addRate(@RequestBody RateDto rateDto){
         try {
             return ResponseEntity.status(200).body(rateService.addRate(rateDto));
         } catch (Exception e) {
@@ -38,6 +39,21 @@ public class RateController {
         } else {
             return ResponseEntity.status(200).body(null);
         }
+    }
+
+    @GetMapping("/users/{id}/rates")
+    public ResponseEntity<List<RateEntity>> getRatesByUsers(@PathVariable Long id){
+        return ResponseEntity.ok().body(rateService.getRatesByUsers(id));
+    }
+
+    @GetMapping("/opportunities/{id}/rates")
+    public ResponseEntity<List<RateEntity>> getRatesByOppos(@PathVariable Long id){
+        return ResponseEntity.ok().body(rateService.getRatesByOppos(id));
+    }
+
+    @GetMapping("/organizations/{id}/rates")
+    public ResponseEntity<List<RateEntity>> getRatesByOrg(@PathVariable Long id){
+        return ResponseEntity.ok().body(rateService.getRatesByOrg(id));
     }
     
 }

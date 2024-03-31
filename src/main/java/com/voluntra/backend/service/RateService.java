@@ -11,4 +11,7 @@ import com.voluntra.backend.entity.RateEntity;
 public interface RateService {
     List<RateEntity> getAllRates();
     RateEntity addRate(RateDto rateDto);
+    List<RateEntity> getRatesByUsers(Long id);
+    List<RateEntity> getRatesByOppos(Long id);
+    List<RateEntity> getRatesByOrg(Long id);
 }

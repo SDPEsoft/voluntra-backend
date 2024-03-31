@@ -54,6 +54,36 @@ public class RateServiceImpl implements RateService{
         return rateRepository.findAll();
     }
 
+    @Override
+    public List<RateEntity> getRatesByOppos(Long id) {
+        OpportunityEntity opportunityEntity = opportunityRepository.findById(id).orElse(null);
+        if (opportunityEntity!=null) {
+            return rateRepository.findRatesByOppos(opportunityEntity);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public List<RateEntity> getRatesByUsers(Long id) {
+        UserEntity userEntity = userRepository.findById(id).orElse(null);
+        if (userEntity!=null) {
+            return rateRepository.findRatesByUsers(userEntity);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public List<RateEntity> getRatesByOrg(Long id) {
+        OrganizationEntity organizationEntity = organizationRepository.findById(id).orElse(null);
+        if (organizationEntity!=null) {
+            return rateRepository.findRatesByOrg(organizationEntity);
+        } else {
+            return null;
+        }
+    }
+
     
     
 }

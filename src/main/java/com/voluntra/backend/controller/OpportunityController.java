@@ -59,7 +59,7 @@ public class OpportunityController {
         return opportunityService.updateOpportunity((id), opportunityEntity);
     }
 
-    @GetMapping("organizations/{id}/opportunities")
+    @GetMapping("/organizations/{id}/opportunities")
     public ResponseEntity<List<OpportunityEntity>> getOpportunitiesByOrganization(@PathVariable Long id){
         return ResponseEntity.ok().body(opportunityService.getOpportunitiesByOrganization(id));
     }

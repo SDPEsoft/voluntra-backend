@@ -11,4 +11,6 @@ import com.voluntra.backend.entity.UserOppoEntity;
 public interface UserOppoService {
     List<UserOppoEntity> getAllUserOppos();
     UserOppoEntity createUserOppo(UserOppoDto userOppoDto);
+    List<UserOppoEntity> getUserOpposByUsers(Long id);
+    List<UserOppoEntity> getUserOpposByOppos(Long id);
 }

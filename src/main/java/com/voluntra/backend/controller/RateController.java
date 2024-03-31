@@ -3,6 +3,7 @@ package com.voluntra.backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,6 +55,16 @@ public class RateController {
     @GetMapping("/organizations/{id}/rates")
     public ResponseEntity<List<RateEntity>> getRatesByOrg(@PathVariable Long id){
         return ResponseEntity.ok().body(rateService.getRatesByOrg(id));
+    }
+
+    @GetMapping("/rates/{id}")
+    public ResponseEntity<RateEntity> getRatesById(@PathVariable Long id){
+        RateEntity rateEntity = rateService.getRatesById(id);
+        if (rateEntity!=null) {
+            return ResponseEntity.status(HttpStatus.OK).body(rateEntity);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
     
 }

@@ -3,6 +3,7 @@ package com.voluntra.backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,6 +50,16 @@ public class UserOppoController {
     @GetMapping("/users/{id}/useroppos")
     public ResponseEntity<List<UserOppoEntity>> getUserOpposByUsers(@PathVariable Long id){
         return ResponseEntity.ok().body(userOppoService.getUserOpposByUsers(id));
+    }
+
+    @GetMapping("/useroppos/{id}")
+    public ResponseEntity<UserOppoEntity> getUserOpposById(@PathVariable Long id){
+        UserOppoEntity userOppoEntity = userOppoService.getUserOpposById(id);
+        if (userOppoEntity!=null) {
+            return ResponseEntity.status(HttpStatus.OK).body(userOppoEntity);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
     
 }

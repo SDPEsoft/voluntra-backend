@@ -71,5 +71,10 @@ public class UserOppoServiceImpl implements UserOppoService{
             return null;
         }
     }
+
+    @Override
+    public UserOppoEntity getUserOpposById(Long id) {
+        return userOppoRepository.findById(id).orElse(null);
+    }
     
 }

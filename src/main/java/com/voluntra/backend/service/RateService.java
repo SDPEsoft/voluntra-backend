@@ -14,4 +14,5 @@ public interface RateService {
     List<RateEntity> getRatesByUsers(Long id);
     List<RateEntity> getRatesByOppos(Long id);
     List<RateEntity> getRatesByOrg(Long id);
+    RateEntity getRatesById(Long id);
 }

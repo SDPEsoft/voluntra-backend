@@ -13,4 +13,5 @@ public interface UserOppoService {
     UserOppoEntity createUserOppo(UserOppoDto userOppoDto);
     List<UserOppoEntity> getUserOpposByUsers(Long id);
     List<UserOppoEntity> getUserOpposByOppos(Long id);
+    UserOppoEntity getUserOpposById(Long id);
 }

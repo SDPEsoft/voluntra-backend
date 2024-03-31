@@ -84,6 +84,11 @@ public class RateServiceImpl implements RateService{
         }
     }
 
+    @Override
+    public RateEntity getRatesById(Long id) {
+        return rateRepository.findById(id).orElse(null);
+    }
+
     
     
 }

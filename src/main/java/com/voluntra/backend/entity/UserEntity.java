@@ -44,7 +44,7 @@ public class UserEntity {
     private String abilities;
     
     private String talents;
-    
+
     // relationships
 
     @JsonIgnore
@@ -58,5 +58,9 @@ public class UserEntity {
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userEntity", cascade = CascadeType.ALL)
     private List<UserOppoEntity> userOppoEntities;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userEntity", cascade = CascadeType.ALL)
+    private List<RateEntity> rateEntities;
 
 }

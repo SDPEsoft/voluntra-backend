@@ -65,4 +65,8 @@ public class OpportunityEntity {
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "opportunityEntity", cascade = CascadeType.ALL)
     private List<UserOppoEntity> userOppoEntities;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "opportunityEntity", cascade = CascadeType.ALL)
+    private List<RateEntity> rateEntities;
 }

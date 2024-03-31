@@ -52,4 +52,8 @@ public class OrganizationEntity {
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "organizationEntity", cascade = CascadeType.ALL)
     private List<ChatEntity> chats;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organizationEntity", cascade = CascadeType.ALL)
+    private List<RateEntity> rateEntities;
 }

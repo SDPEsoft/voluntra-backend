@@ -22,6 +22,7 @@ public class AdminEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "adminId")
     private Long id;
 
     @Column(unique = true)

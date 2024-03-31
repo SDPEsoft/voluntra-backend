@@ -36,7 +36,4 @@ public class AnnouncementEntity {
     @JoinColumn(name = "organizationId")
     private OrganizationEntity organizationEntity;
 
-    @ManyToOne
-    @JoinColumn(name = "volunteerId")
-    private UserEntity volunteerEntity;
 }

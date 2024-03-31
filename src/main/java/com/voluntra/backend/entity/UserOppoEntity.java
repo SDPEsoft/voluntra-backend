@@ -1,5 +1,7 @@
 package com.voluntra.backend.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,25 +18,39 @@ import lombok.Setter;
 @Getter
 @Setter
 @Data
-@Table(name = "chat")
-public class ChatEntity {
-    
-    // attributes
+@Table(name = "volunteer_opportunities")
+public class UserOppoEntity {
 
+    // attributes
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     @Column(name = "chatId")
+    @Column(name = "voloppoId")
     private Long id;
 
-    private String message;
+    private String name;
+
+    @Column(unique = true)
+    private String username;
+
+    @Column(unique = true)
+    private String email;
+
+    private String abilities;
+
+    private String talents;
+
+    @Column(nullable = false)
+    private LocalDateTime time;
 
     // relationships
 
     @ManyToOne
     @JoinColumn(name = "volunteerId")
-    private UserEntity volunteerEntity;
+    private UserEntity userEntity;
 
     @ManyToOne
-    @JoinColumn(name = "organizationId")
-    private OrganizationEntity organizationEntity;
+    @JoinColumn(name = "opportunityId")
+    private OpportunityEntity opportunityEntity;
+
 }

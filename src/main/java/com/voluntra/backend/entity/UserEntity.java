@@ -1,6 +1,8 @@
 package com.voluntra.backend.entity;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -11,6 +13,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -28,6 +31,7 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "volunteerId")
     private Long id;
 
     @Column(unique = true)
@@ -44,11 +48,12 @@ public class UserEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "volunteerEntity", cascade = CascadeType.ALL)
     private List<ChatEntity> chats;
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "volunteerEntity", cascade = CascadeType.ALL)
-    private List<OpportunityEntity> opportunities;
+    // @JsonIgnore
+    // @ManyToMany(mappedBy = "userEntities")
+    // private Set<OpportunityEntity> opportunityEntities = new HashSet<>();
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "volunteerEntity", cascade = CascadeType.ALL)
-    private List<AnnouncementEntity> announcements;
+    private List<UserOppoEntity> userOppoEntities;
+
 }

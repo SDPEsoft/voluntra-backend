@@ -28,6 +28,7 @@ public class OrganizationEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "organizationId")
     private Long id;
 
     @Column(unique = true)

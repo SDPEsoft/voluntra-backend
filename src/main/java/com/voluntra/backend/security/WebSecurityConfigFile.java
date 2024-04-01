@@ -28,6 +28,22 @@ public class WebSecurityConfigFile {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
+    @Autowired
+    private AdminDetailsServiceImpl adminDetailsService;
+
+    @Autowired
+    private OrganizationDetailsServiceImpl organizationDetailsService;
+
+    @Bean
+    public UserDetailsService adminDetailsService(){
+        return adminDetailsService;
+    }
+
+    @Bean
+    public UserDetailsService organizationDetailsService(){
+        return organizationDetailsService;
+    }
+
     @Bean
     public UserDetailsService userDetailsService(){
         return userDetailsService;
@@ -47,6 +63,8 @@ public class WebSecurityConfigFile {
     public DaoAuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setUserDetailsService(adminDetailsService);
+        authProvider.setUserDetailsService(organizationDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }

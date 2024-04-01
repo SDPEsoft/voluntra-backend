@@ -13,20 +13,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.voluntra.backend.dto.LoginDto;
-import com.voluntra.backend.entity.UserEntity;
-import com.voluntra.backend.repository.UserRepository;
+import com.voluntra.backend.entity.OrganizationEntity;
+import com.voluntra.backend.repository.OrganizationRepository;
 import com.voluntra.backend.security.jwt.JwtUtils;
-import com.voluntra.backend.service.UserService;
+import com.voluntra.backend.service.OrganizationService;
 
 @RestController
 @CrossOrigin(origins = "*")
-public class AuthController {
+public class OrganizationAuthController {
 
     @Autowired
-    UserService userService;
+    OrganizationService organizationService;
 
     @Autowired
-    UserRepository userRepository;
+    OrganizationRepository organizationRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -37,7 +37,7 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
-    @PostMapping("/auth/login")
+    @PostMapping("/auth/org/login")
     public ResponseEntity<?> login(@RequestBody LoginDto loginDto){
         Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword())
@@ -47,23 +47,20 @@ public class AuthController {
         return ResponseEntity.ok().body(token);
     }
 
-    @PostMapping("/auth/register")
-    public ResponseEntity<?> register(@RequestBody UserEntity userEntity){
-        if (userRepository.existsByUsername(userEntity.getUsername())) {
+    @PostMapping("/auth/org/register")
+    public ResponseEntity<?> register(@RequestBody OrganizationEntity organizationEntity){
+        if (organizationRepository.existsByUsername(organizationEntity.getUsername())) {
             return ResponseEntity.badRequest().body("Username is already in use");
         }
-        if (userRepository.existsByEmail(userEntity.getEmail())) {
+        if (organizationRepository.existsByEmail(organizationEntity.getEmail())) {
             return ResponseEntity.badRequest().body("This email is being used");
         }
-        UserEntity newUser = new UserEntity();
-        newUser.setUsername(userEntity.getUsername());
-        newUser.setEmail(userEntity.getEmail());
-        newUser.setInterests(userEntity.getInterests());
-        newUser.setPassword(userEntity.getPassword());
-        newUser.setAbilities(userEntity.getAbilities());
-        newUser.setTalents(userEntity.getTalents());
-
-        return ResponseEntity.ok(userService.createUser(newUser));
+        OrganizationEntity newOrg = new OrganizationEntity();
+        newOrg.setUsername(organizationEntity.getUsername());
+        newOrg.setEmail(organizationEntity.getEmail());
+        newOrg.setPassword(organizationEntity.getPassword());
+        newOrg.setType(organizationEntity.getType());
+        return ResponseEntity.ok(organizationService.createOrganization(newOrg));
     }
     
 }

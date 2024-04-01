@@ -39,6 +39,8 @@ public class OrganizationEntity {
 
     private String password;
 
+    private String type; //non-profit, ...
+
     // relationships
 
     @JsonIgnore

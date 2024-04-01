@@ -1,7 +1,10 @@
 package com.backend.fullstack.mapper;
 
 import com.backend.fullstack.dto.VolunteerDto;
+import com.backend.fullstack.entity.Announcement;
 import com.backend.fullstack.entity.Volunteer;
+
+import java.util.List;
 
 public class VolunteerMapper {
     public static VolunteerDto mapToVolunteerDto(Volunteer volunteer){
@@ -10,7 +13,9 @@ public class VolunteerMapper {
                 volunteer.getName(),
                 volunteer.getContactNumber(),
                 volunteer.getEmail(),
-                volunteer.getPassword()
+                volunteer.getPassword(),
+                volunteer.getAnnouncement()
+
         );
     }
 
@@ -20,7 +25,10 @@ public class VolunteerMapper {
                 volunteerDto.getName(),
                 volunteerDto.getContactNumber(),
                 volunteerDto.getEmail(),
-                volunteerDto.getPassword()
+                volunteerDto.getPassword(),
+                volunteerDto.getAnnouncement()
+
+
         );
     }
 }

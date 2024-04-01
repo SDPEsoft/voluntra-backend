@@ -1,9 +1,12 @@
 package com.backend.fullstack.dto;
 
+import com.backend.fullstack.entity.Announcement;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,4 +18,6 @@ public class VolunteerDto {
     private int contactNumber;
     private String email;
     private String password;
+    private List<Announcement> announcement;
+
 }

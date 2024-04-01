@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 //lombok automatically sets getter and setter and constructors
 @Getter
@@ -32,5 +34,15 @@ public class Volunteer {        //Setting the DataBase entity
     @Column(name = "user_password")
     private String password;
 
-//check list
+    //one to many
+    @OneToMany(mappedBy = "volunteer_id",cascade = CascadeType.ALL)
+    private List<Announcement> announcement;
+
+    /*
+    //Announcement One_To_One Relationship
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_announcement_id")
+    private Announcement announcement;   */
+
+
 }

@@ -20,7 +20,7 @@ public class Announcement {
     @Column(name = "message")
     private  String message;
     @Column(name = "date")
-    private Date date;
+    private String date;
 
     @ManyToOne
     @JoinColumn(name = "volunteer_id")

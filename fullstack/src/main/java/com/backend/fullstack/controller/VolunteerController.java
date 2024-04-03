@@ -21,6 +21,7 @@ public class VolunteerController {
 
     // Constructor injection to initialize VolunteerService
     public VolunteerController(VolunteerService volunteerService) {
+
         this.volunteerService = volunteerService;
     }
 
@@ -29,6 +30,7 @@ public class VolunteerController {
     public ResponseEntity<VolunteerDto> createVolunteer(@RequestBody VolunteerDto volunteerDto){
         VolunteerDto savedVolunteer= volunteerService.createVolunteer(volunteerDto);
 
+//Send mail automatically
         emailSenderService.sendEmail("sai.charan73@yahoo.com","subject","Volunteer added");
 
 

@@ -2,6 +2,10 @@ package com.backend.fullstack.controller;
 
 import com.backend.fullstack.dto.VolunteerDto;
 import com.backend.fullstack.service.VolunteerService;
+import com.backend.fullstack.service.impl.EmailSenderService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +16,8 @@ import java.util.List;
 @RequestMapping("/api/volunteer")
 public class VolunteerController {
     private VolunteerService volunteerService;
+    @Autowired
+    private EmailSenderService emailSenderService;
 
     // Constructor injection to initialize VolunteerService
     public VolunteerController(VolunteerService volunteerService) {
@@ -22,8 +28,13 @@ public class VolunteerController {
     @PostMapping //Post Method
     public ResponseEntity<VolunteerDto> createVolunteer(@RequestBody VolunteerDto volunteerDto){
         VolunteerDto savedVolunteer= volunteerService.createVolunteer(volunteerDto);
+
+        emailSenderService.sendEmail("sai.charan73@yahoo.com","subject","Volunteer added");
+
+
         return new ResponseEntity<>(savedVolunteer, HttpStatus.CREATED);
     }
+
 
     //Build Get Volunteer REST API
     @GetMapping("{id}")

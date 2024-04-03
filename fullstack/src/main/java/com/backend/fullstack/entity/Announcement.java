@@ -25,7 +25,7 @@ public class Announcement {
 
     @ManyToOne
     @JoinColumn(name = "volunteer_id")
-    @JsonIgnore // This prevents Jackson from serializing the volunteer_id
+    @JsonIgnore // This prevents Jackson from serializing the volunteer_id for unlimited loop
     private Volunteer volunteer_id;
 
 }

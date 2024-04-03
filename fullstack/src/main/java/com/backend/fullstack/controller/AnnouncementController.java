@@ -6,10 +6,9 @@ import com.backend.fullstack.service.impl.AnnouncementServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/announcement")
@@ -25,4 +24,23 @@ public class AnnouncementController {
         AnnouncementDto savedAnnouncement = announcementService.createAnnouncement(announcementDto);
         return new ResponseEntity<>(savedAnnouncement, HttpStatus.CREATED);
     }
+
+    @GetMapping
+    ResponseEntity<List<AnnouncementDto>> getAllAnnouncement(){
+       List<AnnouncementDto> announcement= announcementService.getAllAnnouncement();
+       return ResponseEntity.ok(announcement);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<AnnouncementDto> getAnnouncementByID(@PathVariable("id") Long announcementID){
+        AnnouncementDto announcementDto = announcementService.getAnnouncement(announcementID);
+        return ResponseEntity.ok(announcementDto);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteAnnouncement(@PathVariable("id")long announcementID){
+        announcementService.deleteAnnouncement(announcementID);
+        return ResponseEntity.ok("Volunteer deleted successfully");
+    }
+
 }

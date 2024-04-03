@@ -1,5 +1,6 @@
 package com.backend.fullstack.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Announcement {
 
     @ManyToOne
     @JoinColumn(name = "volunteer_id")
+    @JsonIgnore // This prevents Jackson from serializing the volunteer_id
     private Volunteer volunteer_id;
 
 }

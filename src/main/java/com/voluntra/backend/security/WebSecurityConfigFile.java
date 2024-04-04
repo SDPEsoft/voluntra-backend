@@ -63,8 +63,14 @@ public class WebSecurityConfigFile {
     public DaoAuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider2(){
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(adminDetailsService);
-        authProvider.setUserDetailsService(organizationDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
@@ -80,10 +86,11 @@ public class WebSecurityConfigFile {
             .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth ->
-                auth.requestMatchers("/auth/***").permitAll()
+                auth.requestMatchers("/auth/***", "/auth/admin/***", "/auth/org/***").permitAll()
                 .anyRequest().authenticated()
             );
             http.authenticationProvider(authenticationProvider());
+            http.authenticationProvider(authenticationProvider2());
             http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
             return http.build();
     }

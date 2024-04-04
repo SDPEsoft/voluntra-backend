@@ -68,14 +68,6 @@ public class WebSecurityConfigFile {
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider2(){
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(adminDetailsService);
-        authProvider.setPasswordEncoder(passwordEncoder());
-        return authProvider;
-    }
-
-    @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
@@ -90,7 +82,6 @@ public class WebSecurityConfigFile {
                 .anyRequest().authenticated()
             );
             http.authenticationProvider(authenticationProvider());
-            http.authenticationProvider(authenticationProvider2());
             http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
             return http.build();
     }

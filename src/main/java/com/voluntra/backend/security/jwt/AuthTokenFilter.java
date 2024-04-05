@@ -11,8 +11,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.voluntra.backend.security.AdminDetailsServiceImpl;
-import com.voluntra.backend.security.OrganizationDetailsServiceImpl;
 import com.voluntra.backend.security.UserDetailsServiceImpl;
 
 import jakarta.servlet.FilterChain;
@@ -28,55 +26,22 @@ public class AuthTokenFilter extends OncePerRequestFilter{
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
-    @Autowired
-    private AdminDetailsServiceImpl adminDetailsService;
-
-    @Autowired
-    private OrganizationDetailsServiceImpl organizationDetailsService;
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        // try {
-        //     String jwt = parseJwtFromHeader(request);
-        //     if (jwt!=null && jwtUtils.validateToken(jwt)) {
-        //         String username = jwtUtils.getUsernameFromToken(jwt);
-        //         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        //         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-        //         authenticationToken.setDetails(new WebAuthenticationDetails(request));
-        //         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-        //     }
-        // } catch (Exception e) {
-        //     System.err.println(e);
-        // }
-        // filterChain.doFilter(request, response);
-
         try {
             String jwt = parseJwtFromHeader(request);
-            if (jwt != null && jwtUtils.validateToken(jwt)) {
+            if (jwt!=null && jwtUtils.validateToken(jwt)) {
                 String username = jwtUtils.getUsernameFromToken(jwt);
-                UserDetails userDetails = null;
-    
-                if (request.getRequestURI().startsWith("/auth/admin")) {
-                    userDetails = adminDetailsService.loadUserByUsername(username);
-                } else if (request.getRequestURI().startsWith("/auth/org")) {
-                    userDetails = organizationDetailsService.loadUserByUsername(username);
-                } else {
-                    userDetails = userDetailsService.loadUserByUsername(username);
-                }
-    
-                if (userDetails != null) {
-                    UsernamePasswordAuthenticationToken authenticationToken =
-                            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                    authenticationToken.setDetails(new WebAuthenticationDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-                }
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                authenticationToken.setDetails(new WebAuthenticationDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
         } catch (Exception e) {
             System.err.println(e);
         }
-        filterChain.doFilter(request, response);
-        
+        filterChain.doFilter(request, response); 
     }
 
     private String parseJwtFromHeader(HttpServletRequest request){

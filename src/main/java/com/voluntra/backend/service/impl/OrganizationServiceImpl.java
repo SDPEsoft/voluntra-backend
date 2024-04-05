@@ -3,6 +3,8 @@ package com.voluntra.backend.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.voluntra.backend.dto.UserPwdDto;
@@ -15,6 +17,9 @@ public class OrganizationServiceImpl implements OrganizationService{
 
     @Autowired
     private OrganizationRepository organizationRepository;
+
+    @Autowired
+    JavaMailSender javaMailSender;
 
     @Override
     public OrganizationEntity changeUserPassword(Long id, UserPwdDto userPwdDto) {
@@ -30,6 +35,12 @@ public class OrganizationServiceImpl implements OrganizationService{
 
     @Override
     public OrganizationEntity createOrganization(OrganizationEntity organizationEntity) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setSubject("Voluntra | Registration Successful");
+        message.setTo(organizationEntity.getEmail());
+        message.setFrom("tech1234music@gmail.com");
+        message.setText("Hello "+organizationEntity.getUsername()+". Your Organization Registration is Successful with Voluntra ! Have a nice day !!");
+        javaMailSender.send(message);
         return organizationRepository.save(organizationEntity);
     }
 

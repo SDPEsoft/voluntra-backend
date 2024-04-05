@@ -3,6 +3,8 @@ package com.voluntra.backend.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.voluntra.backend.dto.UserPwdDto;
@@ -15,6 +17,9 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
 
     @Override
     public UserEntity changeUserPassword(Long id, UserPwdDto userPwdDto) {
@@ -30,6 +35,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserEntity createUser(UserEntity userEntity) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setSubject("Voluntra | Registration Successful");
+        message.setTo(userEntity.getEmail());
+        message.setFrom("tech1234music@gmail.com");
+        message.setText("Hello "+userEntity.getUsername()+". Your Registration is Successful with Voluntra ! Have a nice day !!");
+        javaMailSender.send(message);
         return userRepository.save(userEntity);
     }
 

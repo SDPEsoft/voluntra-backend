@@ -20,7 +20,7 @@ public class AdminDetailsServiceImpl implements UserDetailsService {
         AdminEntity adminEntity = adminRepository.findByUsername(username).orElse(null);
 
         if (adminEntity == null) {
-            throw new UsernameNotFoundException("User is not found with the username");
+            throw new UsernameNotFoundException("Admin is not found with the username");
         }
 
         return org.springframework.security.core.userdetails.User.builder()

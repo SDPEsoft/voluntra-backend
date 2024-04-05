@@ -35,22 +35,22 @@ public class WebSecurityConfigFile {
     private OrganizationDetailsServiceImpl organizationDetailsService;
 
     @Bean
-    public UserDetailsService adminDetailsService(){
+    public UserDetailsService adminDetailsService() {
         return adminDetailsService;
     }
 
     @Bean
-    public UserDetailsService organizationDetailsService(){
+    public UserDetailsService organizationDetailsService() {
         return organizationDetailsService;
     }
 
     @Bean
-    public UserDetailsService userDetailsService(){
+    public UserDetailsService userDetailsService() {
         return userDetailsService;
     }
 
     @Bean
-    public AuthTokenFilter authenticationJwtTokenFilter(){
+    public AuthTokenFilter authenticationJwtTokenFilter() {
         return new AuthTokenFilter();
     }
 
@@ -60,9 +60,11 @@ public class WebSecurityConfigFile {
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider(){
+    public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
+        // authProvider.setUserDetailsService(organizationDetailsService);
+        // authProvider.setUserDetailsService(adminDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
@@ -75,15 +77,16 @@ public class WebSecurityConfigFile {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf(csrf -> csrf.disable())
-            .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth ->
-                auth.requestMatchers("/auth/***", "/auth/admin/***", "/auth/org/***").permitAll()
-                .anyRequest().authenticated()
-            );
-            http.authenticationProvider(authenticationProvider());
-            http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-            return http.build();
+                .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/***",
+                        "/auth/admin/***",
+                        "/auth/org/***").permitAll()
+                        .anyRequest().authenticated());
+        http.authenticationProvider(authenticationProvider());
+        http.addFilterBefore(authenticationJwtTokenFilter(),
+                UsernamePasswordAuthenticationFilter.class);
+        return http.build();
     }
-    
+
 }

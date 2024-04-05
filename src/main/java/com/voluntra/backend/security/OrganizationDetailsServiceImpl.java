@@ -20,7 +20,7 @@ public class OrganizationDetailsServiceImpl implements UserDetailsService {
         OrganizationEntity organizationEntity = organizationRepository.findByUsername(username).orElse(null);
 
         if (organizationEntity == null) {
-            throw new UsernameNotFoundException("User is not found with the username");
+            throw new UsernameNotFoundException("Organization is not found with the username");
         }
 
         return org.springframework.security.core.userdetails.User.builder()

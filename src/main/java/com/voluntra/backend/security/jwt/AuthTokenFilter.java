@@ -37,45 +37,45 @@ public class AuthTokenFilter extends OncePerRequestFilter{
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        // try {
+        //     String jwt = parseJwtFromHeader(request);
+        //     if (jwt!=null && jwtUtils.validateToken(jwt)) {
+        //         String username = jwtUtils.getUsernameFromToken(jwt);
+        //         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        //         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        //         authenticationToken.setDetails(new WebAuthenticationDetails(request));
+        //         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        //     }
+        // } catch (Exception e) {
+        //     System.err.println(e);
+        // }
+        // filterChain.doFilter(request, response);
+
         try {
             String jwt = parseJwtFromHeader(request);
-            if (jwt!=null && jwtUtils.validateToken(jwt)) {
+            if (jwt != null && jwtUtils.validateToken(jwt)) {
                 String username = jwtUtils.getUsernameFromToken(jwt);
-                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                authenticationToken.setDetails(new WebAuthenticationDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                UserDetails userDetails = null;
+    
+                if (request.getRequestURI().startsWith("/auth/admin")) {
+                    userDetails = adminDetailsService.loadUserByUsername(username);
+                } else if (request.getRequestURI().startsWith("/auth/org")) {
+                    userDetails = organizationDetailsService.loadUserByUsername(username);
+                } else {
+                    userDetails = userDetailsService.loadUserByUsername(username);
+                }
+    
+                if (userDetails != null) {
+                    UsernamePasswordAuthenticationToken authenticationToken =
+                            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                    authenticationToken.setDetails(new WebAuthenticationDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                }
             }
         } catch (Exception e) {
             System.err.println(e);
         }
         filterChain.doFilter(request, response);
-        // try {
-        //     String jwt = parseJwtFromHeader(request);
-        //     if (jwt != null && jwtUtils.validateToken(jwt)) {
-        //         String username = jwtUtils.getUsernameFromToken(jwt);
-        //         UserDetails userDetails = null;
-
-        //         if (userDetailsService != null) {
-        //             userDetails = userDetailsService.loadUserByUsername(username);
-        //         } else if (adminDetailsService != null) {
-        //             userDetails = adminDetailsService.loadUserByUsername(username);
-        //         } else if (organizationDetailsService != null) {
-        //             userDetails = organizationDetailsService.loadUserByUsername(username);
-        //         }
-
-        //         if (userDetails != null) {
-        //             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-        //                     userDetails, null, userDetails.getAuthorities());
-        //             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-        //             SecurityContextHolder.getContext().setAuthentication(authentication);
-        //         }
-        //     }
-        // } catch (Exception e) {
-        //     System.err.println(e);
-        // }
-
-        // filterChain.doFilter(request, response);
         
     }
 

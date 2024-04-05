@@ -20,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         UserEntity userEntity = userRepository.findByUsername(username).orElse(null);
 
         if (userEntity == null) {
-            throw new UsernameNotFoundException("User is not found with the username");
+            throw new UsernameNotFoundException("Volunteer is not found with the username");
         }
 
         return org.springframework.security.core.userdetails.User.builder()

@@ -59,7 +59,7 @@ public class UserAuthController {
         newUser.setUsername(userEntity.getUsername());
         newUser.setEmail(userEntity.getEmail());
         newUser.setInterests(userEntity.getInterests());
-        newUser.setPassword(userEntity.getPassword());
+        newUser.setPassword(passwordEncoder.encode(userEntity.getPassword()));
         newUser.setAbilities(userEntity.getAbilities());
         newUser.setTalents(userEntity.getTalents());
 

@@ -58,7 +58,7 @@ public class OrganizationAuthController {
         OrganizationEntity newOrg = new OrganizationEntity();
         newOrg.setUsername(organizationEntity.getUsername());
         newOrg.setEmail(organizationEntity.getEmail());
-        newOrg.setPassword(organizationEntity.getPassword());
+        newOrg.setPassword(passwordEncoder.encode(organizationEntity.getPassword()));
         newOrg.setType(organizationEntity.getType());
         return ResponseEntity.ok(organizationService.createOrganization(newOrg));
     }

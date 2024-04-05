@@ -58,7 +58,7 @@ public class AdminAuthController {
         AdminEntity newAdmin = new AdminEntity();
         newAdmin.setUsername(adminEntity.getUsername());
         newAdmin.setEmail(adminEntity.getEmail());
-        newAdmin.setPassword(adminEntity.getPassword());
+        newAdmin.setPassword(passwordEncoder.encode(adminEntity.getPassword()));
         return ResponseEntity.ok(adminService.createAdmin(newAdmin));
     }
     

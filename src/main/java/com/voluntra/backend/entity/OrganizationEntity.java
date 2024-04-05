@@ -21,14 +21,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @Data
-@Table(name = "volunteer")
-public class UserEntity {
-
+@Table(name = "organization")
+public class OrganizationEntity {
+    
     // attributes
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "volunteerId")
+    @Column(name = "organizationId")
     private Long id;
 
     @Column(unique = true)
@@ -39,28 +39,23 @@ public class UserEntity {
 
     private String password;
 
-    private String interests;
-
-    private String abilities;
-    
-    private String talents;
+    private String type; //non-profit, ...
 
     // relationships
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "volunteerEntity", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organizationEntity", cascade = CascadeType.ALL)
+    private List<OpportunityEntity> opportunities;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organizationEntity", cascade = CascadeType.ALL)
+    private List<AnnouncementEntity> announcements;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organizationEntity", cascade = CascadeType.ALL)
     private List<ChatEntity> chats;
 
-    // @JsonIgnore
-    // @ManyToMany(mappedBy = "userEntities")
-    // private Set<OpportunityEntity> opportunityEntities = new HashSet<>();
-
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userEntity", cascade = CascadeType.ALL)
-    private List<UserOppoEntity> userOppoEntities;
-
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userEntity", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organizationEntity", cascade = CascadeType.ALL)
     private List<RateEntity> rateEntities;
-
 }

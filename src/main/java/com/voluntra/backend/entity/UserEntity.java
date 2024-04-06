@@ -1,5 +1,6 @@
 package com.voluntra.backend.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -36,6 +37,12 @@ public class UserEntity {
 
     @Column(unique = true)
     private String email;
+
+    private String address;
+
+    private Date dob;
+
+    private String phoneno;
 
     private String password;
 

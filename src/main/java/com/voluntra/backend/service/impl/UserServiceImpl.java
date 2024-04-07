@@ -53,5 +53,22 @@ public class UserServiceImpl implements UserService{
     public UserEntity getUserById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public UserEntity updateUser(Long id, UserEntity userEntity) {
+        UserEntity existingUser = userRepository.findById(id).orElse(null);
+        if (existingUser!=null) {
+            existingUser.setAddress(userEntity.getAddress());
+            existingUser.setDob(userEntity.getDob());
+            existingUser.setPhoneno(userEntity.getPhoneno());
+            existingUser.setInterests(userEntity.getInterests());
+            existingUser.setAbilities(userEntity.getAbilities());
+            existingUser.setTalents(userEntity.getTalents());
+            existingUser.setProfilelink(userEntity.getProfilelink());
+            return userRepository.save(existingUser);
+        } else {
+            return null;
+        }
+    }
     
 }

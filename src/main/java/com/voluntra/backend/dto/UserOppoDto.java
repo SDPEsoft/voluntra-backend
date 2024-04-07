@@ -9,8 +9,6 @@ import lombok.Setter;
 @Setter
 public class UserOppoDto {
     private Long id;
-    private String name;
-    private String contact;
     private String qualification;
     private LocalDateTime time;
     private Long volunteerId;

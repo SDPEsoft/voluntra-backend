@@ -13,4 +13,5 @@ public interface OrganizationService {
     OrganizationEntity getOrganizationById(Long id);
     List<OrganizationEntity> getAllOrganizations();
     OrganizationEntity changeUserPassword(Long id, UserPwdDto userPwdDto);
+    OrganizationEntity updateOrganization(Long id, OrganizationEntity organizationEntity);
 }

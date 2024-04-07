@@ -28,10 +28,6 @@ public class UserOppoEntity {
     @Column(name = "voloppoId")
     private Long id;
 
-    private String name;
-
-    private String contact;
-
     private String qualification; // qualification lvl - list type
 
     @Column(nullable = false)

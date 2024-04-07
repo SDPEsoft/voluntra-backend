@@ -53,5 +53,19 @@ public class OrganizationServiceImpl implements OrganizationService{
     public OrganizationEntity getOrganizationById(Long id) {
         return organizationRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public OrganizationEntity updateOrganization(Long id, OrganizationEntity organizationEntity) {
+        OrganizationEntity existingOrg = organizationRepository.findById(id).orElse(null);
+        if (existingOrg!=null) {
+            existingOrg.setAddress(organizationEntity.getAddress());
+            existingOrg.setDescription(organizationEntity.getDescription());
+            existingOrg.setType(organizationEntity.getType());
+            existingOrg.setProfilelink(organizationEntity.getProfilelink());
+            return organizationRepository.save(existingOrg);
+        } else {
+            return null;
+        }
+    }
     
 }

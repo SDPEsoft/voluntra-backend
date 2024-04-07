@@ -52,6 +52,8 @@ public class UserEntity {
     
     private String talents;
 
+    private String profilelink; //link to profile image
+
     // relationships
 
     @JsonIgnore

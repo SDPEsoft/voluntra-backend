@@ -39,7 +39,13 @@ public class OrganizationEntity {
 
     private String password;
 
+    private String address;
+
+    private String description;
+
     private String type; //non-profit, ...
+
+    private String profilelink; //link to profile image
 
     // relationships
 

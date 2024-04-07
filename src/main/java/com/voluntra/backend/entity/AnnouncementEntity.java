@@ -1,6 +1,6 @@
 package com.voluntra.backend.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,9 +26,13 @@ public class AnnouncementEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String title;
+
     private String message;
 
-    private Date date;
+    private String description;
+
+    private LocalDateTime date;
 
     // relationships
 

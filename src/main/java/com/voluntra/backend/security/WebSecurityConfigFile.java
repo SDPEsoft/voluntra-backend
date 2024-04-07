@@ -63,7 +63,11 @@ public class WebSecurityConfigFile {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/***",
                         "/auth/admin/***",
-                        "/auth/org/***").permitAll()
+                        "/auth/org/***",
+                        "/v3/api-docs/**",
+                        "v3/api-docs.yaml",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html").permitAll()
                         .anyRequest().authenticated());
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationJwtTokenFilter(),

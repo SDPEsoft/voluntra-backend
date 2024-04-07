@@ -42,5 +42,10 @@ public class OrganizationController {
     public ResponseEntity<OrganizationEntity> changeUserPassword(@PathVariable Long id, @RequestBody UserPwdDto userPwdDto){
         return ResponseEntity.ok().body(organizationService.changeUserPassword(id, userPwdDto));
     }
+
+    @PutMapping("/organizations/{id}")
+    public OrganizationEntity updateOrganization(@PathVariable Long id, @RequestBody OrganizationEntity organizationEntity){
+        return organizationService.updateOrganization(id, organizationEntity);
+    }
     
 }

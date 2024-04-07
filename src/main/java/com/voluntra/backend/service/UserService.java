@@ -12,5 +12,6 @@ public interface UserService {
     UserEntity createUser(UserEntity userEntity);
     UserEntity getUserById(Long id);
     List<UserEntity> getAllUsers();
+    UserEntity updateUser(Long id, UserEntity userEntity);
     UserEntity changeUserPassword(Long id, UserPwdDto userPwdDto);
 }

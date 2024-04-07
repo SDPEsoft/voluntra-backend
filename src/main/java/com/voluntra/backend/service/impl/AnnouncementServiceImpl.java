@@ -1,5 +1,6 @@
 package com.voluntra.backend.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,11 @@ public class AnnouncementServiceImpl implements AnnouncementService{
         OrganizationEntity organizationEntity = organizationRepository.findById(announcementDto.getOrganizationId()).orElse(null);
         if (organizationEntity!=null) {
             AnnouncementEntity announcementEntity = new AnnouncementEntity();
+            announcementEntity.setTitle(announcementDto.getTitle());
             announcementEntity.setMessage(announcementDto.getMessage());
-            announcementEntity.setDate(announcementDto.getDate());
+            announcementEntity.setDescription(announcementDto.getDescription());
+            LocalDateTime dateTime = LocalDateTime.now();
+            announcementEntity.setDate(dateTime);
             announcementEntity.setOrganizationEntity(organizationEntity);
             return announcementRepository.save(announcementEntity);
         } else {

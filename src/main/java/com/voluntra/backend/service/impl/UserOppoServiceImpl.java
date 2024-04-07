@@ -40,8 +40,6 @@ public class UserOppoServiceImpl implements UserOppoService {
         if (userEntity != null && opportunityEntity != null) {
             UserOppoEntity userOppoEntity = new UserOppoEntity();
             userOppoEntity.setId(userOppoDto.getId());
-            userOppoEntity.setName(userOppoDto.getName());
-            userOppoEntity.setContact(userOppoDto.getContact());
             userOppoEntity.setQualification(userOppoDto.getQualification());
             LocalDateTime dateTime = LocalDateTime.now();
             userOppoEntity.setTime(dateTime);

@@ -62,6 +62,10 @@ public class UserAuthController {
         newUser.setPassword(passwordEncoder.encode(userEntity.getPassword()));
         newUser.setAbilities(userEntity.getAbilities());
         newUser.setTalents(userEntity.getTalents());
+        newUser.setAddress(userEntity.getAddress());
+        newUser.setDob(userEntity.getDob());
+        newUser.setPhoneno(userEntity.getPhoneno());
+        newUser.setProfilelink(userEntity.getProfilelink());
 
         return ResponseEntity.ok(userService.createUser(newUser));
     }

@@ -60,6 +60,9 @@ public class OrganizationAuthController {
         newOrg.setEmail(organizationEntity.getEmail());
         newOrg.setPassword(passwordEncoder.encode(organizationEntity.getPassword()));
         newOrg.setType(organizationEntity.getType());
+        newOrg.setAddress(organizationEntity.getAddress());
+        newOrg.setDescription(organizationEntity.getDescription());
+        newOrg.setProfilelink(organizationEntity.getProfilelink());
         return ResponseEntity.ok(organizationService.createOrganization(newOrg));
     }
     

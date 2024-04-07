@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.voluntra.backend.dto.UserPwdDto;
+import com.voluntra.backend.dto.UserUpdateDto;
 import com.voluntra.backend.entity.UserEntity;
 import com.voluntra.backend.service.UserService;
 
@@ -44,7 +45,7 @@ public class UserController {
     }
 
     @PutMapping("/users/{id}")
-    public UserEntity updateUser(@PathVariable Long id, @RequestBody UserEntity userEntity){
-        return userService.updateUser(id, userEntity);
+    public ResponseEntity<UserEntity> updateUser(@PathVariable Long id, @RequestBody UserUpdateDto userUpdateDto){
+        return ResponseEntity.ok().body(userService.updateUser(id, userUpdateDto));
     }
 }

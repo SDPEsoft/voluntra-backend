@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.voluntra.backend.dto.OrgUpdateDto;
 import com.voluntra.backend.dto.UserPwdDto;
 import com.voluntra.backend.entity.OrganizationEntity;
 
@@ -13,5 +14,5 @@ public interface OrganizationService {
     OrganizationEntity getOrganizationById(Long id);
     List<OrganizationEntity> getAllOrganizations();
     OrganizationEntity changeUserPassword(Long id, UserPwdDto userPwdDto);
-    OrganizationEntity updateOrganization(Long id, OrganizationEntity organizationEntity);
+    OrganizationEntity updateOrganization(Long id, OrgUpdateDto orgUpdateDto);
 }

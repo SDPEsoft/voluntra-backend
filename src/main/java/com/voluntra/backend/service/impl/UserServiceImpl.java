@@ -8,6 +8,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.voluntra.backend.dto.UserPwdDto;
+import com.voluntra.backend.dto.UserUpdateDto;
 import com.voluntra.backend.entity.UserEntity;
 import com.voluntra.backend.repository.UserRepository;
 import com.voluntra.backend.service.UserService;
@@ -55,16 +56,16 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserEntity updateUser(Long id, UserEntity userEntity) {
+    public UserEntity updateUser(Long id, UserUpdateDto userUpdateDto) {
         UserEntity existingUser = userRepository.findById(id).orElse(null);
         if (existingUser!=null) {
-            existingUser.setAddress(userEntity.getAddress());
-            existingUser.setDob(userEntity.getDob());
-            existingUser.setPhoneno(userEntity.getPhoneno());
-            existingUser.setInterests(userEntity.getInterests());
-            existingUser.setAbilities(userEntity.getAbilities());
-            existingUser.setTalents(userEntity.getTalents());
-            existingUser.setProfilelink(userEntity.getProfilelink());
+            existingUser.setAddress(userUpdateDto.getAddress());
+            existingUser.setDob(userUpdateDto.getDob());
+            existingUser.setPhoneno(userUpdateDto.getPhoneno());
+            existingUser.setInterests(userUpdateDto.getInterests());
+            existingUser.setAbilities(userUpdateDto.getAbilities());
+            existingUser.setTalents(userUpdateDto.getTalents());
+            existingUser.setProfilelink(userUpdateDto.getProfilelink());
             return userRepository.save(existingUser);
         } else {
             return null;

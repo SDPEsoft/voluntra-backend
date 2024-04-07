@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.voluntra.backend.dto.UserPwdDto;
+import com.voluntra.backend.dto.UserUpdateDto;
 import com.voluntra.backend.entity.UserEntity;
 
 @Service
@@ -12,6 +13,6 @@ public interface UserService {
     UserEntity createUser(UserEntity userEntity);
     UserEntity getUserById(Long id);
     List<UserEntity> getAllUsers();
-    UserEntity updateUser(Long id, UserEntity userEntity);
+    UserEntity updateUser(Long id, UserUpdateDto userUpdateDto);
     UserEntity changeUserPassword(Long id, UserPwdDto userPwdDto);
 }

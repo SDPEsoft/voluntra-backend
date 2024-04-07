@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.voluntra.backend.dto.OrgUpdateDto;
 import com.voluntra.backend.dto.UserPwdDto;
 import com.voluntra.backend.entity.OrganizationEntity;
 import com.voluntra.backend.service.OrganizationService;
@@ -44,8 +45,8 @@ public class OrganizationController {
     }
 
     @PutMapping("/organizations/{id}")
-    public OrganizationEntity updateOrganization(@PathVariable Long id, @RequestBody OrganizationEntity organizationEntity){
-        return organizationService.updateOrganization(id, organizationEntity);
+    public ResponseEntity<OrganizationEntity> updateOrganization(@PathVariable Long id, @RequestBody OrgUpdateDto orgUpdateDto){
+        return ResponseEntity.ok().body(organizationService.updateOrganization(id, orgUpdateDto));
     }
     
 }

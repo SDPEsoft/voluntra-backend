@@ -7,6 +7,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.voluntra.backend.dto.OrgUpdateDto;
 import com.voluntra.backend.dto.UserPwdDto;
 import com.voluntra.backend.entity.OrganizationEntity;
 import com.voluntra.backend.repository.OrganizationRepository;
@@ -55,13 +56,13 @@ public class OrganizationServiceImpl implements OrganizationService{
     }
 
     @Override
-    public OrganizationEntity updateOrganization(Long id, OrganizationEntity organizationEntity) {
+    public OrganizationEntity updateOrganization(Long id, OrgUpdateDto orgUpdateDto) {
         OrganizationEntity existingOrg = organizationRepository.findById(id).orElse(null);
         if (existingOrg!=null) {
-            existingOrg.setAddress(organizationEntity.getAddress());
-            existingOrg.setDescription(organizationEntity.getDescription());
-            existingOrg.setType(organizationEntity.getType());
-            existingOrg.setProfilelink(organizationEntity.getProfilelink());
+            existingOrg.setAddress(orgUpdateDto.getAddress());
+            existingOrg.setDescription(orgUpdateDto.getDescription());
+            existingOrg.setType(orgUpdateDto.getType());
+            existingOrg.setProfilelink(orgUpdateDto.getProfilelink());
             return organizationRepository.save(existingOrg);
         } else {
             return null;

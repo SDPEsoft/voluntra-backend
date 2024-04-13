@@ -68,7 +68,7 @@ public class WebSecurityConfigFile {
                         "v3/api-docs.yaml",
                         "/swagger-ui/**",
                         "/swagger-ui.html").permitAll()
-                        .anyRequest().permitAll();
+                        .anyRequest().permitAll());
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationJwtTokenFilter(),
                 UsernamePasswordAuthenticationFilter.class);

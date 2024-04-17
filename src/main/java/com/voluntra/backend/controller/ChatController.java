@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.voluntra.backend.dto.ChatDto;
 import com.voluntra.backend.entity.ChatEntity;
 import com.voluntra.backend.service.ChatService;
 
@@ -23,7 +24,7 @@ public class ChatController {
     private ChatService chatService;
 
     @PostMapping("/chats")
-    public ResponseEntity<ChatEntity> createChat(@RequestBody ChatEntity chat) {
+    public ResponseEntity<ChatEntity> createChat(@RequestBody ChatDto chat) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(chatService.createChat(chat));
         } catch (Exception e) {
